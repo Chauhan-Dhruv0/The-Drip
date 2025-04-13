@@ -1,0 +1,26 @@
+/* Hide the menu by default */
+.menu {
+    display: none;
+  }
+  
+  /* On desktop screens (1024px and above), display as a flex container */
+  @media screen and (min-width: 1024px) {
+    .menu {
+      display: flex;
+      gap: 1.5rem; /* Space between items (similar to Tailwind's space-x-6) */
+    }
+  }
+  
+  /* Styling for the links */
+  .menu-link {
+    color: #4a5568;        /* Equivalent to Tailwind's text-gray-700 */
+    font-size: 0.875rem;    /* Equivalent to Tailwind's text-sm */
+    font-weight: 500;       /* Equivalent to Tailwind's font-medium */
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+  
+  .menu-link:hover {
+    color: #000;           /* Changes color on hover (similar to Tailwind's hover:text-black) */
+  }
+  
