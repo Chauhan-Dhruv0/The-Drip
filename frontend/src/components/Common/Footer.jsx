@@ -32,7 +32,7 @@ function Footer() {
             <li><Link to="/" className="hover:underline">Home</Link></li>
             <li><Link to="/collections/all" className="hover:underline">Shop All</Link></li>
             <li><Link to="/about-us" className="hover:underline">About Us</Link></li>
-            <li><a href="#" className="hover:underline italic">Community (Vibes)</a></li>
+            <li><a href="/my-orders" className="hover:underline italic">My Orders</a></li>
           </ul>
         </div>
 

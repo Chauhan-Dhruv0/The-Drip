@@ -96,10 +96,45 @@ router.post("/login", async (req, res) => {
       }
     );
   } catch (error) {
+    
     console.log(error);
     res.status(500).send("Server Error");
   }
 });
+
+// @route   PUT api/users/change-password
+// @desc    Change password for logged-in user
+// @access  Private
+router.put("/change-password", protect, async (req, res) => {
+  const { currentPassword, newPassword } = req.body;
+
+  try {
+    const user = await User.findById(req.user.id);
+
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    const isMatch = await user.matchPassword(currentPassword);
+
+    if (!isMatch) {
+      return res.status(400).json({ message: "Current password is incorrect" });
+    }
+
+    // Validate new password pattern
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&^_-])[A-Za-z\d@$!%*#?&^_-]{6,}$/;
+    if (!passwordRegex.test(newPassword)) {
+      return res.status(400).json({ message: "New password must include at least 1 letter, 1 number, and 1 special character." });
+    }
+
+    user.password = newPassword;
+    await user.save();
+
+    res.json({ message: "Password updated successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Server error");
+  }
+});
+
 
 // @router GET api/users/profile
 // @desc Get user logged-in user's profile (Protected Route)

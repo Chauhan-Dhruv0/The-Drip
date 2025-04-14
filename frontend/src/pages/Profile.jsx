@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom';
 import { logout } from '../redux/Slice/authSlice';
 import { clearCart } from '../redux/Slice/cartSlice';
+import { Link } from 'react-router-dom';
 
 function Profile() {
     const {user} = useSelector((state)=> state.auth);
@@ -30,9 +31,10 @@ function Profile() {
                 <div className='w-full md:w-1/3 lg:w-1/4 shadow-md rounded-lg p-6'>
                     <h1 className='text-2xl md:text-3xl font-bold mb-4'>{user?.name}</h1>
                     <p className='text-lg text-gray-600 mb-4'>{user?.email}</p>
-                    <button onClick={handleLogout} className='w-full bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600'>
+                    <button onClick={handleLogout} className='w-full bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600 mb-6'>
                         Logout
                     </button>
+                    <Link to="/change-password" className='w-full  bg-red-500 text-white py-2 px-4 rounded hover:bg-red-600' >Change Password</Link>
                     
                 </div>
                 {/* Right Section */}

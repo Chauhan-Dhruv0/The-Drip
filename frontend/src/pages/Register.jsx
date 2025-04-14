@@ -4,6 +4,7 @@ import loginImage from "/assets/page-assets/leaves.png";
 import { registerUser } from "../redux/Slice/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { mergeCart } from "../redux/Slice/cartSlice";
+import { toast } from "sonner"; // if not already imported
 
 const Register = () => {
     const [name, setName] = useState("");
@@ -31,11 +32,25 @@ const Register = () => {
         }
     }, [user, guestId, cart, navigate, isCheckoutRedirect, dispatch]);
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        dispatch(registerUser({ name, email, password }));
-        // console.log("User Registered",{Name,email,password});
-    };
+    // const handleSubmit = (e) => {
+    //     e.preventDefault();
+    //     dispatch(registerUser({ name, email, password }));
+    //     // console.log("User Registered",{Name,email,password});
+    // };
+    
+const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Validate password
+    const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&^_-])[A-Za-z\d@$!%*#?&^_-]{6,}$/;
+
+    if (!passwordRegex.test(password)) {
+        toast.error("Password must contain at least 1 letter, 1 number, and 1 special character.");
+        return;
+    }
+
+    dispatch(registerUser({ name, email, password }));
+};
 
     return (
         <div className="min-h-screen flex flex-col md:flex-row">

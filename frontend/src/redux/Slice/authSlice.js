@@ -1,5 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { toast } from "sonner";
+
 
 // Retrieve user info from localStorage if available
 const userFromStorage = localStorage.getItem("userInfo")
@@ -32,10 +34,14 @@ export const loginUser = createAsyncThunk(
       localStorage.setItem("userToken", response.data.token);
       return response.data.user;
     } catch (error) {
-      return rejectWithValue(error.response.data);
+      const message =
+        error.response?.data?.message || "Something went wrong during login";
+      toast.error(message); // ✅ This toast will now show
+      return rejectWithValue({ message });
     }
   }
 );
+
 
 // Async thunk for user registration
 export const registerUser = createAsyncThunk(

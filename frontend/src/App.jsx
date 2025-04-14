@@ -15,6 +15,7 @@ import AboutUs from "./pages/AboutUs";
 import ContactUs from "./pages/Support";
 import TermsAndConditions from "./pages/TermsAndConditions";
 import MyOrderPage from "./pages/MyOrderPage";
+import ChangePassword from "./pages/ChangePassword";
 import AdmitLayout from "./components/Admin/AdmitLayout";
 import AdminHomepage from "./components/Admin/AdminHomepage";
 import UserManagement from "./components/Admin/UserManagement";
@@ -55,6 +56,8 @@ function App({ addToCart }) {
             <Route path="contact-us" element={<ContactUs />} />
             <Route path="about-us" element={<AboutUs />} />
             <Route path="Terms-conditions" element={<TermsAndConditions />} />
+            <Route path="/change-password" element={<ChangePassword />} />
+
 
           </Route>
 
